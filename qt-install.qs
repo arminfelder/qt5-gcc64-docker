@@ -1,14 +1,14 @@
 function Controller() {
-    installer.autoRejectMessageBoxes();
-    installer.setMessageBoxAutomaticAnswer("OverwriteTargetDirectory", QMessageBox.Yes);
-    installer.setMessageBoxAutomaticAnswer("stopProcessesForUpdates", QMessageBox.Ignore);
+
     installer.installationFinished.connect(function() {
-        gui.clickButton(buttons.NextButton);
-    })
+            gui.clickButton(buttons.NextButton);
+    });
+    installer.setMessageBoxAutomaticAnswer("OverwriteTargetDirectory", QMessageBox.Yes);
+    installer.setMessageBoxAutomaticAnswer("installationErrorWithRetry", QMessageBox.Ignore);
 }
 
 Controller.prototype.WelcomePageCallback = function() {
-    gui.clickButton(buttons.NextButton);
+    gui.clickButton(buttons.NextButton,1000);
 }
 
 Controller.prototype.CredentialsPageCallback = function() {
@@ -30,21 +30,12 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
 
     widget.selectAll();
     widget.selectComponent("qt.595.gcc_64");
+
     widget.deselectComponent("qt.595.android_armv7");
     widget.deselectComponent("qt.595.android_x86");
-
-    //widget.selectComponent("qt.55.qtquickcontrols");
-
     widget.deselectComponent("qt.tools.qtcreator");
-    // widget.deselectComponent("qt.55.qt3d");
-    // widget.deselectComponent("qt.55.qtcanvas3d");
-    // widget.deselectComponent("qt.55.qtlocation");
-    // widget.deselectComponent("qt.55.qtquick1");
-    // widget.deselectComponent("qt.55.qtscript");
-    // widget.deselectComponent("qt.55.qtwebengine");
-    // widget.deselectComponent("qt.extras");
-    widget.deselectComponent("qt.tools.doc");
-    widget.deselectComponent("qt.tools.examples");
+    widget.deselectComponent("qt.595.doc");
+    widget.deselectComponent("qt.595.examples");
 
     gui.clickButton(buttons.NextButton);
 }

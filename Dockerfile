@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM afelder/infer:latest
 
 ADD qt-install.qs /
 
@@ -45,8 +45,8 @@ RUN apt-get install -y \
 
 # Download && Install Qt
 RUN curl -LS http://download.qt.io/official_releases/qt/5.9/5.9.5/qt-opensource-linux-x64-5.9.5.run -o qt-install.run \
-	&& chmod +x qt-install.run \
-	&& ./qt-install.run --script qt-install.qs --platform minimal -v \
+	&& chmod +x qt-install.run
+RUN ./qt-install.run --script qt-install.qs --platform minimal -v \
 	&& rm qt-install.run
 
 ENV PATH="/opt/Qt/5.9.5/gcc_64/bin:${PATH}"
